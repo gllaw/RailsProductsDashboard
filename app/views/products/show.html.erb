@@ -1,0 +1,34 @@
+	<table>
+		<tr>
+			<td>Name: </td>
+			<td><%= @product.name %></td>
+		</tr>
+		<tr>
+			<td>Description: </td>
+			<td><%= @product.description%></td>
+		</tr>
+		<tr>
+			<td>Price: </td>
+			<td><%= @product.pricing %></td>
+		</tr>
+		<tr>
+			<td>Category: </td>
+			<td><%= @product.c_name %></td>
+		</tr>
+	</table>
+	<p>
+	<a href="/products/<%= @product.id %>/edit">Edit</a> | 
+	<a href="/">Back</a>
+	</p>
+
+	<form action="/comments" method="post">
+		<input type="hidden" name="commentform[product_id]" value="<%= @product.id %>">
+  		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<p><label>Comment:</label></p>
+		<textarea name="commentform[comment]" cols="70" rows="5"></textarea>
+		<input type="submit" value="Submit">
+	</form>
+	<% @comments.each do |c| %>
+	<p><%= c.comment %> - <%= c.created_at.strftime("%m/%d/%y") %></p>
+	<% end %>
+	
